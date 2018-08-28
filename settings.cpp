@@ -63,14 +63,19 @@ void Settings::setMonthTime(const int &monthTime)
     m_monthTime = monthTime;
 }
 
-ColorTableModel &Settings::colorTableModel()
+ColorTableModel *Settings::colorTableModel()
 {
     return m_colorTableModel;
 }
 
 Settings::Settings()
 {
+    m_colorTableModel = new ColorTableModel;
+}
 
+Settings::~Settings()
+{
+    delete m_colorTableModel;
 }
 
 Settings *Settings::Instance()

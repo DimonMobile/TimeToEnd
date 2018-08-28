@@ -15,6 +15,8 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui->spinBox_2->setValue(vSettings->salary());
     ui->doubleSpinBox->setValue(vSettings->tax());
     ui->spinBox_3->setValue(vSettings->monthTime());
+
+    ui->tableView->setModel(Settings::Instance()->colorTableModel());
 }
 
 void SettingsDialog::write()

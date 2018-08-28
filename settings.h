@@ -7,7 +7,7 @@
 class Settings
 {
 private:
-    ColorTableModel m_colorTableModel;
+    ColorTableModel *m_colorTableModel;
     QTime m_startTime;
     int m_lengthTime;
     bool  m_autoInit;
@@ -17,6 +17,7 @@ private:
     static Settings *m_instance;
 protected:
     Settings();
+    ~Settings();
 public:
     static Settings *Instance();
     void load();
@@ -33,7 +34,7 @@ public:
     void setTax(double tax);
     int monthTime() const;
     void setMonthTime(const int &monthTime);
-    ColorTableModel &colorTableModel();
+    ColorTableModel *colorTableModel();
 };
 
 #endif // SETTINGS_H
