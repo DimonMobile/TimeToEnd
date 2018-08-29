@@ -67,20 +67,15 @@ void MainWindow::onOneSecTimerTimeout()
     double completedMoney = moneyPerMSec * completedMSec;
     double fullMoney = moneyPerMSec * fullTimeMSec;
 
-    if (percents >= 100.0)
-    {
-        percents = 100.0;
-        ui->label->setStyleSheet("Color: red");
-    }
-    else if (percents >= 99)
-    {
-        ui->label->setStyleSheet(QString("Color: rgb(%1, %2, %3)").arg(percents/100.0*255.0).arg( 255 - (percents-99)*255.0 ).arg(0));
-    }
-    else
-    {
-        ui->label->setStyleSheet(QString("Color: rgb(%1, %2, %3)").arg(percents/100.0*255.0).arg(255).arg(0));
-    }
+    int srcPrc = qMin(static_cast<int>(percents), 100);
+    QColor fColor = Settings::Instance()->colorTableModel()->colorAt(srcPrc);
+    QColor sColor = Settings::Instance()->colorTableModel()->colorAt(qMin(static_cast<int>(percents+1), 100));
 
+    double fx = (percents - srcPrc) / 1.0;
+    double redOffset = ( sColor.red() - fColor.red() ) * fx;
+    double greenOffset = ( sColor.green() - fColor.green()) * fx;
+    double blueOffset = ( sColor.blue() - fColor.blue() ) * fx;
+    ui->label->setStyleSheet(QString("Color: rgb(%1, %2, %3)").arg(fColor.red() + redOffset).arg(fColor.green() + greenOffset).arg(fColor.blue() + blueOffset));
 
     QString resultString;
     resultString = QString::number(percents, 'g', 4);

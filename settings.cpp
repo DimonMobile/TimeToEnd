@@ -98,6 +98,14 @@ void Settings::load()
     m_salary = set.value("salary", 0).toInt();
     m_tax = set.value("tax", 0).toDouble();
     m_monthTime = set.value("monthTime").toInt();
+    int arLen = set.beginReadArray("colors");
+    for(int i = 0 ; i < arLen; ++i)
+    {
+        set.setArrayIndex(i);
+        m_colorTableModel->autoAt(i) = set.value("isAuto").toBool();
+        m_colorTableModel->colorAt(i) = set.value("color").value<QColor>();
+    }
+    set.endArray();
     set.endGroup();
 }
 
@@ -111,5 +119,13 @@ void Settings::save()
     set.setValue("salary", m_salary);
     set.setValue("tax", m_tax);
     set.setValue("monthTime", m_monthTime);
+    set.beginWriteArray("colors", m_colorTableModel->colorSize());
+    for(int i = 0 ; i < m_colorTableModel->colorSize(); ++i)
+    {
+        set.setArrayIndex(i);
+        set.setValue("isAuto", m_colorTableModel->autoAt(i));
+        set.setValue("color", m_colorTableModel->colorAt(i));
+    }
+    set.endArray();
     set.endGroup();
 }

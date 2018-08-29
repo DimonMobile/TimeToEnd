@@ -40,3 +40,8 @@ void SettingsDialog::on_pushButton_clicked()
 {
     QApplication::exit(EXIT_SUCCESS);
 }
+
+void SettingsDialog::on_pushButton_2_clicked()
+{
+    Settings::Instance()->colorTableModel()->resetData();
+}
