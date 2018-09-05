@@ -58,10 +58,10 @@ void MainWindow::onOneSecTimerTimeout()
 {
     Settings *vSettings = Settings::Instance();
     ++m_uptime;
-    int fullTimeMSec = vSettings->lengthTime() * 3600 * 1000;
+    double fullTimeMSec = vSettings->lengthTime() * 3600 * 1000;
     QTime tim = vSettings->startTime().addMSecs(fullTimeMSec);
-    int elapsedMSec = QTime::currentTime().msecsTo(tim);
-    int completedMSec = fullTimeMSec - elapsedMSec;
+    double elapsedMSec = QTime::currentTime().msecsTo(tim);
+    double completedMSec = fullTimeMSec - elapsedMSec;
     double percents{static_cast<double>(completedMSec)/fullTimeMSec*100.0};
     double moneyPerMSec = ( vSettings->salary()*(1-vSettings->tax()/100.0) ) / (vSettings->monthTime()*3600*1000 );
     double completedMoney = moneyPerMSec * completedMSec;

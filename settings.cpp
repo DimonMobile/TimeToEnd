@@ -13,12 +13,12 @@ void Settings::setStartTime(const QTime &startTime)
     m_startTime = startTime;
 }
 
-int Settings::lengthTime() const
+double Settings::lengthTime() const
 {
     return m_lengthTime;
 }
 
-void Settings::setLengthTime(const int &lengthTime)
+void Settings::setLengthTime(const double &lengthTime)
 {
     m_lengthTime = lengthTime;
 }
@@ -94,7 +94,7 @@ void Settings::load()
         m_startTime = QTime::currentTime();
     else
         m_startTime = set.value("startTime", QTime::currentTime()).toTime();
-    m_lengthTime = set.value("lengthTime", 6).toInt();
+    m_lengthTime = set.value("lengthTime", 6).toDouble();
     m_salary = set.value("salary", 0).toInt();
     m_tax = set.value("tax", 0).toDouble();
     m_monthTime = set.value("monthTime").toInt();
