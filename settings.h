@@ -9,7 +9,7 @@ class Settings
 private:
     ColorTableModel *m_colorTableModel;
     QTime m_startTime;
-    int m_lengthTime;
+    double m_lengthTime;
     bool  m_autoInit;
     int m_salary;
     double m_tax;
@@ -24,8 +24,8 @@ public:
     void save();
     QTime startTime() const;
     void setStartTime(const QTime &startTime);
-    int lengthTime() const;
-    void setLengthTime(const int &lengthTime);
+    double lengthTime() const;
+    void setLengthTime(const double &lengthTime);
     bool autoInit() const;
     void setAutoInit(bool autoInit);
     int salary() const;
